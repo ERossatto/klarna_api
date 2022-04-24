@@ -1,4 +1,4 @@
-import { IWeather } from "./IWeather.interface";
+import { IWeather } from "./IWeather";
 
 export class Weather implements IWeather {
 
