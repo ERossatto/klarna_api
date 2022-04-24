@@ -1,12 +1,17 @@
 {
   "compilerOptions": {
+    "baseUrl": "src",
     "target": "es2017",   
     "module": "commonjs",
     "allowJs": true,  
     "esModuleInterop": true,
     "skipLibCheck": true, 
     "forceConsistentCasingInFileNames": true,
-    "strict": false
+    "strict": false,
+    "paths": {
+      "@IWeather/*": ["entities/weather/IWeather.ts"],
+      "@ICity/*": ["entities/city/ICity.ts"],
+    }
   },
   "include": [
     "src/**/*.ts"
