@@ -1,10 +1,10 @@
-
 import { Request, Response } from 'express';
 
+import { IUseCaseController } from './../useCasesInterfaces';
 import { Coordinate } from '../../entities/coordinate/Coordinate';
 import { GetCities } from './GetCities';
 
-export class GetCitiesController {
+export class GetCitiesController implements IUseCaseController {
   constructor(
     private getCities: GetCities,
   ) {}
@@ -17,7 +17,7 @@ export class GetCitiesController {
       if (!lat || !lng) throw new Error();
   
       const coordinate = new Coordinate({
-        lat: parseFloat(lat as string),
+        lat: parseFloat(lat as string), //TODO testar se livrar disso
         lng: parseFloat(lng as string)
       });
 

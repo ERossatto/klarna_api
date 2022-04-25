@@ -1,8 +1,9 @@
+import { IUseCase } from './../useCasesInterfaces';
 import { ICity } from '@ICity/*';
 import { IGetCitiesDTO } from './IGetCitiesDTO';
 import { ICityFinder } from './../../providers/cityFinder/ICityFinder';
 
-export class GetCities {
+export class GetCities implements IUseCase<IGetCitiesDTO, ICity[]>{
   constructor(
     private cityFinder: ICityFinder,
   ) {}

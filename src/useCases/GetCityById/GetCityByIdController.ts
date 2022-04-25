@@ -1,7 +1,9 @@
-import { GetCityById } from './GetCityById';
 import { Request, Response } from 'express';
 
-export class GetCityByIdController {
+import { IUseCaseController } from './../useCasesInterfaces';
+import { GetCityById } from './GetCityById';
+
+export class GetCityByIdController implements IUseCaseController {
   constructor(
     private getCityById: GetCityById,
   ) {}
@@ -12,7 +14,7 @@ export class GetCityByIdController {
 
       const city = await this.getCityById.execute({cityId: parseInt(cityId)});
 
-      return res.status(200).send(city);
+      return res.status(200).json(city);
       
     } catch(err) {
       return res.status(404).json({
