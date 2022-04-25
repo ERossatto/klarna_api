@@ -1,4 +1,4 @@
-import { ICoordinate } from "./ICoordinate";
+import { ICoordinate } from './ICoordinate';
 
 export class Coordinate implements ICoordinate {
 
