@@ -1,10 +1,10 @@
 import { getDistance } from 'geolib';
+import { readFileSync } from 'fs';
 
 import { ICityFinder } from '../ICityFinder';
 import { ICity } from '@ICity/*';
 import { ICoordinate } from '@ICoordinate/*';
 import { City } from '../../../entities/city/City';
-import { readFile } from '../../../utils/json';
 
 interface ICityList {
   id: number;
@@ -24,7 +24,7 @@ export class FindOnLocalFile implements ICityFinder {
   constructor() {}
 
   private getCityList(): ICityList[] {
-    return readFile<ICityList>(this.localFile);
+    return JSON.parse(readFileSync(this.localFile).toString());
   }
 
   public async getCityById(cityId: number): Promise<ICity> {
