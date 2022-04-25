@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 
 import { getCitiesController } from './useCases/GetCities';
 import { getCityByIdController } from './useCases/GetCityById';
+import { getCityWeatherByIdController } from './useCases/GetCityWeatherById';
 
 const router = Router();
 
@@ -14,8 +15,7 @@ router.get('/cities/:cityId', (req: Request, res: Response ) => {
 });
 
 router.get('/cities/:cityId/weather', (req: Request, res: Response ) => {
-  const cityId = req.params.cityId;
-  return res.status(201).send(cityId);
+  return getCityWeatherByIdController.handle(req, res);
 });
 
 export { router };
