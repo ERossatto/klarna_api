@@ -21,6 +21,7 @@
     "@types/express": "^4.17.13",
     "@types/geolib": "^2.0.23",
     "axios": "^0.26.1",
+    "dayjs": "^1.11.1",
     "express": "^4.17.3",
     "geolib": "^3.3.3"
   },
