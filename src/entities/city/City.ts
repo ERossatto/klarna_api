@@ -5,11 +5,12 @@ export class City implements ICity {
 
   public readonly id: number;
   public name: string;
-  public coordinate: ICoordinate;
+  public lat: number;
+  public lng: number;
 
-  constructor(props: Omit<ICity, 'coordinate'>, coordinate?: ICoordinate) {
+  constructor(props: Omit<ICity, 'lat' | 'lng'>, coordinate?: ICoordinate) {
     Object.assign(this, props);
     
-    if (!!coordinate) this.coordinate = coordinate;
+    if (!!coordinate) Object.assign(this, coordinate);
   }
 }

@@ -1,13 +1,14 @@
-import { ICity } from "@ICity/*";
-import { ICitiesLocation } from "providers/citiesLocation/ICitiesLocation";
-import { IGetCitiesDTO } from "./IGetCitiesDTO";
+import { ICity } from '@ICity/*';
+import { IGetCitiesDTO } from './IGetCitiesDTO';
+import { ICityFinder } from './../../providers/cityFinder/ICityFinder';
 
 export class GetCities {
   constructor(
-    private citiesLocation: ICitiesLocation,
+    private cityFinder: ICityFinder,
   ) {}
 
   public async execute(data: IGetCitiesDTO): Promise<ICity[]> {
-    return await this.citiesLocation.getCitiesByCoordinates(data);
+    const rangeInMeters = 10000;
+    return await this.cityFinder.getCitiesOnRangeByCoordinate(data, rangeInMeters);
   }
 }

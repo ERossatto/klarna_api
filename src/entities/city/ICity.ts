@@ -1,7 +1,8 @@
 import { ICoordinate } from '@ICoordinate/*';
 
-export interface ICity {
+export interface ICity extends ICoordinate{
   id: number;
   name: string;
-  coordinate: ICoordinate;
+  lat: number;
+  lng: number;
 }
