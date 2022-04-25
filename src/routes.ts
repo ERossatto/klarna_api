@@ -1,16 +1,20 @@
 import { Router } from 'express';
-// import { MinhaClasse } from './useCases/...';
+import { getCitiesController } from './useCases/GetCities';
 
 const router = Router();
 
-router.get('/cities', (req, res) => {
-  console.log('req.query: ', req.query);
-  
-  return (
-    res
-    .status(200)
-    .json({"goku": "super-sayajin"})
-  );
-})
+router.get('/cities', (req: any, res: any ) => { //TODO fix any
+  return getCitiesController.handle(req, res);
+});
+
+router.get('/cities/:cityId', (req: any, res: any ) => { //TODO fix any
+  const cityId = req.params.cityId;
+  return res.status(201).send(cityId);
+});
+
+router.get('/cities/:cityId/weather', (req: any, res: any ) => { //TODO fix any
+  const cityId = req.params.cityId;
+  return res.status(201).send(cityId);
+});
 
 export { router };
