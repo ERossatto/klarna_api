@@ -11,6 +11,7 @@
     "paths": {
       "@IWeather/*": ["entities/weather/IWeather.ts"],
       "@ICity/*": ["entities/city/ICity.ts"],
+      "@ICoordinate/*": ["entities/coordinate/ICoordinate.ts"],
     }
   },
   "include": [
