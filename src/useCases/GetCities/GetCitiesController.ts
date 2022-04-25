@@ -17,11 +17,16 @@ export class GetCitiesController implements IUseCaseController {
       if (!lat || !lng) throw new Error();
   
       const coordinate = new Coordinate({
-        lat: parseFloat(lat as string), //TODO testar se livrar disso
+        lat: parseFloat(lat as string),
         lng: parseFloat(lng as string)
       });
 
-      const cities = await this.getCities.execute(coordinate);
+      const rangeInMeters = 10000;
+
+      const cities = await this.getCities.execute({
+        coordinate,
+        rangeInMeters
+      });
 
       return res.status(200).json(cities);
 

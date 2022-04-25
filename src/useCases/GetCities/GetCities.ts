@@ -9,7 +9,6 @@ export class GetCities implements IUseCase<IGetCitiesDTO, ICity[]>{
   ) {}
 
   public async execute(data: IGetCitiesDTO): Promise<ICity[]> {
-    const rangeInMeters = 10000;
-    return await this.cityFinder.getCitiesOnRangeByCoordinate(data, rangeInMeters);
+    return await this.cityFinder.getCitiesOnRangeByCoordinate(data.coordinate, data.rangeInMeters);
   }
 }

@@ -1,6 +1,6 @@
 import { ICoordinate } from '@ICoordinate/*';
 
-export interface IGetCitiesDTO extends ICoordinate {
-  lat: number;
-  lng: number;
+export interface IGetCitiesDTO {
+  coordinate: ICoordinate;
+  rangeInMeters: number;
 }
