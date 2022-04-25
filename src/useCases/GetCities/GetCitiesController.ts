@@ -1,29 +1,30 @@
-import { Request, Response } from "express";
-import { GetCities } from "./GetCities";
-import { IGetCitiesDTO } from "./IGetCitiesDTO";
 
-interface CustomRequest extends Request {
-  query: {
-    lat: string,
-    lng: string,
-  };
-};
+import { Request, Response } from 'express';
+
+import { Coordinate } from '../../entities/coordinate/Coordinate';
+import { GetCities } from './GetCities';
 
 export class GetCitiesController {
   constructor(
     private getCities: GetCities,
   ) {}
 
-  async handle(req: CustomRequest, res: Response): Promise<Response> {
-    const lat = parseFloat(req.query.lat);
-    const lng = parseFloat(req.query.lng);
-    
-    if (!lat || !lng) throw new Error();
-
+  async handle(req: Request, res: Response): Promise<Response> {
     try {
-      const cities = await this.getCities.execute({ lat, lng });
+      const lat = req.query?.lat;
+      const lng = req.query?.lng;
+      
+      if (!lat || !lng) throw new Error();
+  
+      const coordinate = new Coordinate({
+        lat: parseFloat(lat as string),
+        lng: parseFloat(lng as string)
+      });
 
-      return res.status(200).send(cities);
+      const cities = await this.getCities.execute(coordinate);
+
+      return res.status(200).json(cities);
+
     } catch(err) {
       return res.status(400).json({
         "code":"BadRequestError",

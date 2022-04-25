@@ -1,5 +1,6 @@
 import { ICity } from '@ICity/*';
+import { ICoordinate } from '@ICoordinate/*';
 
 export interface ICitiesLocation {
-  getCitiesByCoordinates(props: { lat: number, lng: number }): Promise<ICity[]>
+  getCitiesByCoordinates(props: ICoordinate): Promise<ICity[]>;
 }

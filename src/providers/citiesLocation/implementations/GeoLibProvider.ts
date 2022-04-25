@@ -2,8 +2,9 @@ import { readFileSync } from 'fs';
 import { getDistance } from 'geolib';
 
 import { ICity } from '@ICity/*';
-import { ICitiesLocation } from 'providers/citiesLocation/ICitiesLocation';
 import { City } from '../../../entities/city/City';
+import { ICoordinate } from '@ICoordinate/*';
+import { ICitiesLocation } from 'providers/citiesLocation/ICitiesLocation';
 
 interface ICityList {
   id: number;
@@ -11,20 +12,16 @@ interface ICityList {
   state: string;
   country: string;
   coord: {
-      lon: number,
-      lat: number,
+    lon: number,
+    lat: number,
   };
 };
 
 export class GeoLibProvider implements ICitiesLocation {
   constructor() {}
 
-  public async getCitiesByCoordinates(props: { lat: number, lng: number }): Promise<ICity[]> {
-    console.log('lat: ', props.lat);
-    console.log('lng: ', props.lng);
-    
-    const radiusInMeters = 10000;
-
+  public async getCitiesByCoordinates(props: ICoordinate): Promise<ICity[]> {
+    const radiusInMeters = 10000; //TODO colocar no environment
     let cities = JSON.parse(readFileSync('city.list.json').toString()); //TODO tentar melhorar
 
     cities = cities.filter((city: ICityList) => {
@@ -36,6 +33,10 @@ export class GeoLibProvider implements ICitiesLocation {
       return (distance <= radiusInMeters);
     });
 
-    return cities.map( (city: ICityList) => new City({id: city.id, name: city.name}));
+    const parseOut = (cities: ICityList[]): ICity[] => {
+      return cities.map( (city: ICityList) => new City({id: city.id, name: city.name}));
+    };
+    
+    return parseOut(cities);
   }
 }
